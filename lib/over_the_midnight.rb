@@ -1,5 +1,15 @@
 require "over_the_midnight/version"
 
 module OverTheMidnight
-  # Your code goes here...
+  LIB = File.expand_path(File.dirname(__FILE__))
+  ROOT = File.dirname(OverTheMidnight::LIB)
+  
+  def self.new(*args)
+    self::Time.new(*args)
+  end
+end
+
+$:<< OverTheMidnight::LIB
+Dir.glob(File.join(OverTheMidnight::LIB, "**/*.rb")).each do |entory|
+  require entory
 end
