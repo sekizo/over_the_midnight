@@ -1,8 +1,6 @@
 # OverTheMidnight
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/over_the_midnight`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Implements the time expression which strided date.
 
 ## Installation
 
@@ -22,7 +20,20 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+``` ruby
+date = Dte.new(2016, 8, 13)
+
+# version 0.1.x
+require "over_the_midnight"
+otm = OverTheMidnight.new(date, "25:00")
+otm.to_time.strftime("%Y/%m/%d %H:%M")
+#=> "2016/08/14 01:00"
+
+otm = OverTheMidnight.new(date, 30.5)
+otm.to_time.strftime("%Y/%m/%d %H:%M")
+#=> "2016/08/14 06:30"
+
+```
 
 ## Development
 
@@ -32,5 +43,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/over_the_midnight.
-
+Bug reports and pull requests are welcome on GitHub at https://github.com/sekizo/over_the_midnight.
