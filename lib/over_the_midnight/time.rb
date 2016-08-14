@@ -1,6 +1,9 @@
 require "date"
 
 class OverTheMidnight::Time
+  DATE_FORMAT = "%Y/%m/%d"
+  TIME_FORMAT = "%H:%M"
+  
   attr_reader :date
   
   def initialize(date, time)
@@ -9,8 +12,19 @@ class OverTheMidnight::Time
     @raw_time = time
   end
   
-  def to_time
-    parse
+  def hour
+    time.hour + ((time.to_date - date).to_i * 24)
+  end
+  
+  def time
+    @time ||= parse
+  end
+  
+  def to_s
+    date_format = date.strftime(DATE_FORMAT)
+    format = [date_format, TIME_FORMAT].join(" ")
+    format.gsub!(/\%H/, "#{hour}")
+    time.strftime(format)
   end
   
   private
@@ -21,6 +35,8 @@ class OverTheMidnight::Time
       parse_string
     when Numeric
       parse_numeric
+    when Time
+      parse_time
     else
       raise "invalid time"
     end
@@ -41,5 +57,9 @@ class OverTheMidnight::Time
     min   = ((@raw_time % 1.0) * 60)
     _date = @date + (@raw_time / 24)
     Time.new(_date.year, _date.month, _date.day, hour, min)
+  end
+  
+  def parse_time
+    @raw_time
   end
 end
