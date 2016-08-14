@@ -4,7 +4,7 @@ module OverTheMidnight
   LIB = File.expand_path(File.dirname(__FILE__))
   ROOT = File.dirname(OverTheMidnight::LIB)
   
-  def self.new(*args)
+  def self.create(*args)
     self::Time.new(*args)
   end
 end

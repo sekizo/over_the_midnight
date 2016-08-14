@@ -21,17 +21,62 @@ Or install it yourself as:
 ## Usage
 
 ``` ruby
+require "over_the_midnight"
+
 date = Date.new(2016, 8, 13)
 
+#--------------------#
 # version 0.1.x
-require "over_the_midnight"
-otm = OverTheMidnight.new(date, "25:00")
-otm.to_time.strftime("%Y/%m/%d %H:%M")
+# otm = OverTheMidnight.new(date, "25:00")
+# otm.to_time.strftime("%Y/%m/%d %H:%M")
 #=> "2016/08/14 01:00"
 
-otm = OverTheMidnight.new(date, 30.5)
-otm.to_time.strftime("%Y/%m/%d %H:%M")
+# otm = OverTheMidnight.new(date, 30.5)
+# otm.to_time.strftime("%Y/%m/%d %H:%M")
 #=> "2016/08/14 06:30"
+
+#--------------------#
+# version 0.2.x
+
+otm = OverTheMidnight.create(date, "25:00")
+
+otm.class
+#=> OverTheMidnight::Time
+
+otm.date.to_s
+#=> "2016/08/13"
+
+otm.time.class
+#=> Time
+
+otm.time.strftime("%Y/%m/%d %H:%M")
+#=> "2016/08/14 01:00"
+
+otm.to_s
+#=> "2016/08/13 25:00"
+
+#created with Numeric
+otm = OverTheMidnight.create(date, 30.5)
+
+otm.time.strftime("%Y/%m/%d %H:%M")
+#=> "2016/08/14 06:30"
+
+otm.to_s
+#=> "2016/08/13 30:30"
+
+
+# created with Time
+time = Time.local((date + 1).year, (date + 1).month, (date + 1).day, 10, 45)
+
+otm = OvertTheMidnight.create(date, time)
+
+otm.time.strftime("%Y/%m/%d %H:%M")
+#=> "2016/08/14 10:45"
+# NOT "2016/08/13 10:45" 
+
+otm.to_s
+#=> "2016/08/13 34:45"
+# NOT "2016/08/14 10:45" 
 
 ```
 
