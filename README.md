@@ -21,7 +21,7 @@ Or install it yourself as:
 ## Usage
 
 ``` ruby
-date = Dte.new(2016, 8, 13)
+date = Date.new(2016, 8, 13)
 
 # version 0.1.x
 require "over_the_midnight"
